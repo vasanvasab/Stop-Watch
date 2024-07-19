@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './HeaderComponents.css';
+import "./HeaderComponents.css"
 
 const HeaderComponent = () => {
   const [startHours, setStartHours] = useState(0);
@@ -44,7 +44,16 @@ const HeaderComponent = () => {
     setTimerRunning(false);
   };
   
-  const handleReset = () => {}
+  const handleReset = () => {
+    setStartHours(0);
+    setStartMinutes(0);
+    setStartSeconds(0);
+    setElapsedHours(0);
+    setElapsedMinutes(0);
+    setElapsedSeconds(0);
+    setTimerRunning(false);
+  };
+
   const formatTimeUnit = (unit) => unit.toString().padStart(2, '0');
 
   return (
@@ -53,7 +62,7 @@ const HeaderComponent = () => {
       <div className="container">
         <p><button onClick={handleStart} disabled={timerRunning} className='buttons'>Start</button></p>
         <p><button onClick={handleStop} disabled={!timerRunning} className='buttons'>Stop</button></p>
-        <p><button onClick={handleReset} disabled={!timerRunning} className='buttons'>Reset</button></p>
+        <p><button onClick={handleReset} disabled={!timerRunning && (elapsedHours === 0 && elapsedMinutes === 0 && elapsedSeconds === 0)} className='buttons'>Reset</button></p>
       </div>
     </section>
   );
